@@ -6,6 +6,7 @@ export default class menu extends React.Component {
     super(props);
     this.state={};
   }
+  
   render() {
     return (
       <Navbar bg="dark" variant="dark" expand="lg">
