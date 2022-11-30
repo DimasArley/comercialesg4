@@ -66,7 +66,7 @@ export default class login extends React.Component {
 
                     <Button
                       variant="danger"
-                      href="https://google.com"
+                      href="#register"
                     >
                       REGÍSTRATE
                     </Button>

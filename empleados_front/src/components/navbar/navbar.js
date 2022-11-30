@@ -1,36 +1,75 @@
 import React from "react";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-
+import {
+  Navbar,
+  Container,
+  Nav,
+  Form,
+  Button,
+  Dropdown,
+  DropdownButton,
+  Row,
+} from "react-bootstrap";
+import "./navbar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faCartShopping,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 export default class menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state={};
+    this.state = {};
   }
-  
+
   render() {
     return (
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar fixed="top" id="navbar" bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">COMERCIALES<br/>G4</Navbar.Brand>
+          <Navbar.Brand href="#home" align="left" className="mx-5">
+            COMERCIALES
+            <br />
+            G4
+            <span id="usuario-sub-brand"></span>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="BUSCA TU PRODUCTO"
+                className="mx-2"
+                aria-label="Search"
+              />
+              <Button variant="danger">
+                {" "}
+                <FontAwesomeIcon icon={faSearch} />
+              </Button>
+            </Form>
+            <Nav className="mx-auto">
+              {/* <Nav.Link href="#login">INICIAR SESIÓN</Nav.Link> */}           
             </Nav>
+            <DropdownButton
+                id="dropdown-basic-button"
+                title="USUARIO"
+                variant="light"
+                className="mx-2"
+              >
+                <Dropdown.Header id="dropdown-header">
+                  <Row>
+                  <FontAwesomeIcon icon={faUser} />
+                  </Row>
+                  <Row>
+                    #Usuario#
+                  </Row>                
+                </Dropdown.Header>
+                <Dropdown.Divider/>
+                <Dropdown.Item href="#Logout">Cerrar sesión</Dropdown.Item>
+              </DropdownButton>
+              <Button href="#Cart" variant="light">
+                {" "}
+                <FontAwesomeIcon icon={faCartShopping} />
+              </Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>
