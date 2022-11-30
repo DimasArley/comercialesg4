@@ -26,7 +26,7 @@ export default class menu extends React.Component {
     return (
       <Navbar fixed="top" id="navbar" bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="#home" align="left" className="mx-5">
+          <Navbar.Brand href="/home" align="left" className="mx-5">
             COMERCIALES
             <br />
             G4
@@ -64,7 +64,7 @@ export default class menu extends React.Component {
                   </Row>                
                 </Dropdown.Header>
                 <Dropdown.Divider/>
-                <Dropdown.Item href="#Logout">Cerrar sesión</Dropdown.Item>
+                <Dropdown.Item href="/Login">Cerrar sesión</Dropdown.Item>
               </DropdownButton>
               <Button href="#Cart" variant="light">
                 {" "}
