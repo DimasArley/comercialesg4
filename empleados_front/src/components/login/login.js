@@ -1,6 +1,14 @@
 import React from "react";
+import axios from "axios";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
-import './login.css';
+import "./login.css";
+import { isNull } from 'util';
+import Cookies from "universal-cookie";
+import app from "../../app.json";
+import { calculateExtraccionSesion } from "../helper/helper";
+
+const {APIHOST} = app;
+const cookies = new Cookies();
 export default class login extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +19,23 @@ export default class login extends React.Component {
   }
 
   iniciarSesion() {
-    alert(`usuario: ${this.state.usuario} - password: ${this.state.pass} `);
+    axios.post(`${APIHOST}/usuarios/login` ,{
+      usuario: this.state.usuario,
+      pass: this.state.pass,
+    })
+    .then((response) => {
+      if (isNull(response.data.token)) {
+        alert('Usuario y/o contraseña inválidos');        
+      } else {
+        cookies.set('_s', response.data.token, {
+          path: '/',
+          expires: calculateExtraccionSesion(),
+        })        
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   render() {
@@ -32,21 +56,16 @@ export default class login extends React.Component {
               >
                 <Form>
                   <Form.Group>
-                    <Form.Label>
-                      CORREO ELECTRONICO
-                    </Form.Label>
+                    <Form.Label>USUARIO</Form.Label>
                     <Form.Control
-                      type="email"
-                      onChange={(e) =>
+                    onChange={(e) =>
                         this.setState({ usuario: e.target.value })
                       }
                     />
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>
-                      CONTRASEÑA
-                    </Form.Label>
+                    <Form.Label>CONTRASEÑA</Form.Label>
                     <Form.Control
                       type="password"
                       onChange={(e) => this.setState({ pass: e.target.value })}
@@ -56,18 +75,13 @@ export default class login extends React.Component {
                   <div className="d-grid gap-2">
                     <Button
                       variant="dark"
-                      type="submit"                      
                       onClick={() => {
                         this.iniciarSesion();
                       }}
                     >
                       INICIAR SESION
                     </Button>
-
-                    <Button
-                      variant="danger"
-                      href="#register"
-                    >
+                    <Button variant="danger" href="#register">
                       REGÍSTRATE
                     </Button>
                   </div>

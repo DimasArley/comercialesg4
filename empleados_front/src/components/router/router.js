@@ -11,6 +11,7 @@ export default function AppRoutes() {
             <Switch>
                 <Route exact path={["/login"]} component={Login}/>
                 <Route exact path={["/home"]} component={Inicio}/>
+                <Route exact path={["/"]} component={Inicio}/>
                 <Route path={'*'} component={() => (
                     <h1 style={{ marginTop: 300}}>
                         404
